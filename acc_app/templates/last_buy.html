@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Цикличность действий, кейс accenture</title>
+</head>
+<body>
+<h2>Цикличность действий, кейс accenture</h2>
+<table>
+    <tr>
+        <td>Название</td>
+        <td>Последняя цена</td>
+        <td>Макс цена</td>
+        <td>Мин цены</td>
+        <td>Изм-е</td>
+        <td>Изм-е в %</td>
+        <td>Объем</td>
+        <td>Время</td>
+        <td>Данные</td>
+    </tr>
+  {% for line in data %}
+    <tr>
+        <td>{{ line.name }}</td>
+        <td>{{ line.last }}</td>
+        <td>{{ line.max_price }}</td>
+        <td>{{ line.min_price }}</td>
+        <td>{{ line.change }}</td>
+        <td>{{ line.perc_change }}</td>
+        <td>{{ line.amount }}</td>
+        <td>{{ line.data_time }}</td>
+        <td><a href="charts/{{ line.data_id }}">Данные</a></td>
+    </tr>
+  {% endfor %}
+</table>
+</body>
+</html>

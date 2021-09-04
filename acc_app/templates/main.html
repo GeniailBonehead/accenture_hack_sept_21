@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>webRTC</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <h3 id="label-username">name</h3>
+    <div>
+        <input id="username"><button id="btn-join">Join room</button>
+    </div>
+<div class="main-grid-container">
+    <div id="video-container">
+        <div><video id="local-video" style="float: left;" autoplay playsinline></video></div>
+        <button id="button-toggle-audio">Audio Mute</button>
+        <button id="button-toggle-video">Video off</button>
+    </div>
+    <div id="chat">
+        <h3>Chat</h3>
+        <div id="messages">
+            <ul id="message-list"></ul>
+        </div>
+        <div>
+            <input id="msg"><button id="btn-send-msg">Отправить сообщение</button>
+            <button id="btn-share-screen">Share screen</button>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
