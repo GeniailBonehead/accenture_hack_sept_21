@@ -39,6 +39,7 @@ def get_actions_online(site):
         dict_line['change'], dict_line['perc_change'], dict_line['amount'], dict_line['data_time'], _ = \
             [x.text for x in line.find_all('td')]
         dict_line['data_id'] = addit_data.get('data-id')
+        dict_line['link'] = line.find('a').get('href')
         amount = 0
         if 'M' in dict_line['amount']:
             amount = float(dict_line['amount'][:-1].replace(',', '.')) * 1000000
@@ -68,4 +69,64 @@ def get_charts(data_id):
         line["low"] = str(line["low"]).replace(',', '.')
     return data
 
-# get_chart(13720)
+def get_stats(link):
+    site = "https://ru.investing.com" + link + "-ratios"
+    html = requests.get(site, headers=headers)
+    bsObj = BeautifulSoup(html.content, "lxml")
+    block = bsObj.find(id='childTr')
+    table = block.find('table')
+    res = []
+    for line in table.find_all('tr'):
+        name, value, value_comm = [td.text for td in line.find_all('td')]
+        res.append({
+            'name': name,
+            'value': value,
+            'value_comm': value_comm,
+        })
+    return res
+
+def get_money(link):
+    site = "https://ru.investing.com" + link + "-income-statement"
+    html = requests.get(site, headers=headers)
+    bsObj = BeautifulSoup(html.content, "lxml")
+    block = bsObj.find(id='childTr')
+    res = []
+    for line in block.find_all('tr'):
+        name, val1, val2, val3, val4 = [td.text for td in line.find_all('td')]
+        if val1 == '-':
+            val1 = '0'
+        if val2 == '-':
+            val2 = '0'
+        if val3 == '-':
+            val3 = '0'
+        if val4 == '-':
+            val4 = '0'
+        res.append({'name': name,
+                    'val1': val1,
+                    'val2': val2,
+                    'val3': val3,
+                    'val4': val4})
+    block = bsObj.find(id='rrtable').find('table')
+    naming = [th.text for th in block.find('tr').find_all('th')]
+    for line in block.find_all('tr')[10:]:
+        name, val1, val2, val3, val4 = [td.text for td in line.find_all('td')]
+        if val1 == '-':
+            val1 = '0'
+        if val2 == '-':
+            val2 = '0'
+        if val3 == '-':
+            val3 = '0'
+        if val4 == '-':
+            val4 = '0'
+        res.append({'name': name,
+                    'val1': val1,
+                    'val2': val2,
+                    'val3': val3,
+                    'val4': val4})
+    return res, naming
+
+# get_stats()
+# data = get_actions_online('https://ru.investing.com/equities/most-active-stocks')
+# data, naming = get_money('/equities/gazprom_rts')
+# for line in data:
+#     print(line)

@@ -6,36 +6,23 @@
 </head>
 <body>
 <h3 align="center">Цикличность действий, кейс accenture</h3>
-<h2>Самые активные акции</h2>
-<br>
+<h2>Статистика компании</h2>
 <table align="center">
     <tr bgcolor="8888ee">
-        <td>Название</td>
-        <td>Последняя цена</td>
-        <td>Макс цена</td>
-        <td>Мин цены</td>
-        <td>Изм-е</td>
-        <td>Изм-е в %</td>
-        <td>Объем</td>
-        <td>Время</td>
-        <td>График акций</td>
+  {% for name in naming %}
+        <th>{{ name }}</th>
+        {% endfor %}
     </tr>
   {% for line in data %}
-    <tr id="block" class="block">
-        <td><a href="stats{{ line.link }}">{{ line.name }}</a></td>
-        <td>{{ line.last }}</td>
-        <td>{{ line.max_price }}</td>
-        <td>{{ line.min_price }}</td>
-        <td>{{ line.change }}</td>
-        <td>{{ line.perc_change }}</td>
-        <td>{{ line.amount }}</td>
-        <td>{{ line.data_time }}</td>
-        <td><a href="charts/{{ line.data_id }}">График акций</a></td>
+    <tr class="block">
+        <td>{{ line.name }}</td>
+        <td>{{ line.val1 }}</td>
+        <td>{{ line.val2 }}</td>
+        <td>{{ line.val3 }}</td>
+        <td>{{ line.val4 }}</td>
     </tr>
   {% endfor %}
 </table>
-
-
 <script>
 for (var i = 0; i<document.getElementsByClassName("block").length; i++) {
 console.log(i);

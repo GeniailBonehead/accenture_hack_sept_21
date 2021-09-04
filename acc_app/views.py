@@ -26,3 +26,9 @@ def last_buy_nice(request):
 def charts(request, data_id):
     res = get_charts(data_id)
     return render(request, 'charts.html', context={'data': res})
+
+
+def stats(request, link):
+    # return HttpResponse('/equities/' + link)
+    res, naming = get_money('/equities/' + link)
+    return render(request, 'stats.html', context={'data': res, 'naming': naming})
