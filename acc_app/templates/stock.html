@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/acc_style.css' %}">
+    <title>Цикличность действий, accenture</title>
+</head>
+<body>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var points = [
+    {% for line in data.data %}
+    ['{{ line.date }}', {{ line.low }}, {{ line.low }}, {{ line.high }}, {{ line.high }}],
+      {% endfor %}
+    ];
+    var data = google.visualization.arrayToDataTable(points, true);
+
+    var options = {
+      legend:'none'
+    };
+
+    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+    chart.draw(data, options);
+  }
+    </script>
+    <div class="container-fluid">
+        <div class="sidebar">
+            <a class="logo" href="/accenture"><img src="{% static 'img/logo.png' %}" alt="Logo"></a>
+            <div class="row d-flex align-items-center mb-3 mt-5">
+                <div class="col-2">
+                    <img src="{% static 'img/profile.svg' %}" alt="Profile">
+                </div>
+                <div class="col-10">
+                    <h2 class="name mb-0">
+                        <span>Семёнов</span>
+                        Максим Сергеевич
+                    </h2>
+                </div>
+            </div>
+            <p class="type mb-0">Тип риска: <span class="type-01">Консервативный</span></p>
+            <a href="#" class="link-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">узнай, как его сменить</a>
+                        <br><br>
+            <h4><a href="/accenture/portfolio">Перейти в портфель</a></h4>
+            <nav>
+
+            </nav>
+        </div>
+        <div class="content">
+            <div class="d-flex align-items-center content-top mb-5">
+                <div class="col-6">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-6">
+                            <h1 class="account mb-0"><span>Брокерский счет</span>1123TB (основной)</h1>
+                        </div>
+                        <div class="col-6">
+                            <p class="balance mb-0"><span>200 000 $</span> + 1 565 $ | 4,29 %</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 recommendation">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-8">
+                            <p class="mb-0">Поздравляем! Сегодня вы совершили 2&nbsp;прибыльные сделки. Делимся нашими рекомендациями о завтрашнем дне.</p>
+                        </div>
+                        <div class="col-4">
+                          <a href="/accenture/post" class="btn btn-primary w-100">Инвест-идея</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-bottom collapse mb-5" id="collapseExample">
+                <div class="card">
+                    <div class="d-flex align-items-start">
+                        <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                          <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Консервативный</button>
+                          <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Умеренный</button>
+                          <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Агрессивный</button>
+                        </div>
+                        <div class="tab-content" id="v-pills-tabContent">
+                          <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <div class="d-flex">
+                                <div class="col-6 p-2">
+                                    <p class="text-recom">
+                                      Данный портфель подходит тем, кто не готов рисковать. Вероятно, у вас есть цель - сохранить накопленное для будущей пенсии или обучение детей. Рекомендуем присмотреться к облигациям и голубым фишкам. Список инструментов, которые входят в эту группу: 
+                                    </p>
+                                    <ul class="list-stocks">
+                                        <li>
+                                          <a href="/accenture/stock">ОФЗ 26219</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">ОФЗ 26215</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">ОФЗ 26222</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Сбербанк</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Газпром</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">ВТБ</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Apple</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Microsoft</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Amazon</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-3 p-2">
+                                    <p class="text-result">Ожидаемая доходность <span>от 3-5% годовых</span></p>
+                                    <p class="text-result">Ожидаемая волательность <span>Отсутствует</span></p>
+                                    <p class="text-result">Уровень риска <span class="text-result-01">Низкий</span></p>
+                                </div>
+                                <div class="col-3 p-2">
+                                    <p>Структура портфеля</p>
+                                    <div class="d-flex align-items-center visual">
+                                        <div class="col-6">
+                                          <img src="{% static 'img/type-01.svg' %}" alt="">
+                                        </div>
+                                        
+                                        <div class="col-6">
+                                          <ul class="list-profile">
+                                              <li><span></span> Акции</li>
+                                              <li><span></span> Облигации</li>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                            <div class="d-flex">
+                                <div class="col-6 p-2">
+                                    <p class="text-recom">
+                                      Данный портфель подходит тем, кто готов на небольшой риск. рекомендуем выдерживать баланс между акциями и облигациями. Список инструментов, которые могу вас заинтересовать: 
+                                    </p>
+                                    <ul class="list-stocks">
+                                        <li>
+                                          <a href="/accenture/stock">Распадская</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">QIWI</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Башнефть</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Moderna</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Carnival</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Cronos Group</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">America Airlines</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Delta</a>
+                                        </li>
+                                        <li>
+                                          <a href="/accenture/stock">Alibaba</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-3 p-2">
+                                    <p class="text-result">Ожидаемая доходность <span>от 10-15% годовых</span></p>
+                                    <p class="text-result">Ожидаемая волательность <span>Отсутствует</span></p>
+                                    <p class="text-result">Уровень риска <span class="text-result-02">Средний</span></p>
+                                </div>
+                                <div class="col-3 p-2">
+                                    <p>Структура портфеля</p>
+                                    <div class="d-flex align-items-center visual">
+                                        <div class="col-6">
+                                          <img src="{% static 'img/type-02.svg' %}" alt="">
+                                        </div>
+                                        
+                                        <div class="col-6">
+                                          <ul class="list-profile">
+                                              <li><span></span> Акции</li>
+                                              <li><span></span> Облигации</li>
+                                          </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                              <div class="d-flex">
+                                  <div class="col-6 p-2">
+                                      <p class="text-recom">
+                                        Данный портфель лучше использовать тем, кто готов рисковать, пробовать новое. В один день вы можете заработать от 100% и более, а в другой - всё потерять и уйти в минус. Список акций, которые входят в эту группу: 
+                                      </p>
+                                      <ul class="list-stocks">
+                                          <li>
+                                            <a href="/accenture/stock">Virgin Galactic</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">Tesla</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">Zoom</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">TAL</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">Twilio</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">Okta</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">DocuSign</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">Upwork</a>
+                                          </li>
+                                          <li>
+                                            <a href="/accenture/stock">Etsy</a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                                  <div class="col-3 p-2">
+                                      <p class="text-result">Ожидаемая доходность <span>от 20% и более</span></p>
+                                      <p class="text-result">Ожидаемая волательность <span>15 – 25% годовых</span></p>
+                                      <p class="text-result">Уровень риска <span class="text-result-03">Высокий</span></p>
+                                  </div>
+                                  <div class="col-3 p-2">
+                                      <p>Структура портфеля</p>
+                                      <div class="d-flex align-items-center visual">
+                                          <div class="col-6">
+                                            <img src="{% static 'img/type-03.svg' %}" alt="">
+                                          </div>
+                                          
+                                          <div class="col-6">
+                                            <ul class="list-profile">
+                                                <li><span></span> Акции</li>
+                                                <li><span></span> Облигации</li>
+                                            </ul>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="content-profile mb-5">
+              <div class="row">
+                  <div class="col">
+                      <div class="card">
+                          <h2 class="card-title-h2 mb-5">{{ name }}</h2>
+                          <a href="/accenture/stats/equities/{{ link }}">Статистика о компании</a> <br>
+                          <div class="statistic statistic--light mb-5 mt-1">
+                            <div class="statistic-data">
+                              <div class="statistic-item">
+                                <p>
+                                  Текущая цена:
+                                  <span>{{ data.lastClose }}</span>
+                                </p>
+                              </div>
+                              <div class="statistic-item">
+                                <p>
+                                  Изменения дня:
+                                  <span>{{ data.change }} ₽ | {{ data.changePercent }}</span>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="statistic-btn">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="price" value="{{ data.lastClose }}">
+                                    <input type="hidden" name="name" value="{{ name }}">
+                              <input type="submit" class="btn btn-success" value="Купить"></input>
+                              <input type="submit" class="btn btn-danger" value="Продать"></input>
+                                    </form>
+                            </div>
+                          </div>
+                         <div class="row">
+                           <div class="col-8">
+                            <h2 class="card-title">График</h2>
+                               <div id="chart_div" style="width: 730px; height: 290px;"></div>
+                           </div>
+                           <div class="col-4">
+                            <h2 class="card-title">Открытые позиции</h2>
+                            <div class="history">
+                              <ul class="history-list">
+                                <li>Цена открытия позиции: <span>140 ₽ (200 шт)</span></li>
+                                <li>Доля в портфеле: <span>3 %</span></li>
+                                <li>Финансовый результат: <span>18 800 ₽ (20%)</span></li>
+                              </ul>
+                            </div>
+                           </div>
+                         </div>
+                         <div class="row mt-5">
+                           <div class="col">
+                              <h2 class="card-title">История</h2>
+                              <table class="table">
+                                <tbody>
+                                  <tr>
+                                    <td>03.07.2021 13:00:00</td>
+                                    <td>Счет 1123TB (основной)</td>
+                                    <td>Дивиденды</td>
+                                    <td>4 500 ₽</td>
+                                    <td>Налог 13%</td>
+                                    <td>3 915 ₽</td>
+                                  </tr>
+                                  <tr>
+                                    <td>15.06.2021 14:40:23</td>
+                                    <td>Счет 1123TB (основной)</td>
+                                    <td>Продажа</td>
+                                    <td>120 ₽</td>
+                                    <td>60 шт</td>
+                                    <td>7 200 ₽</td>
+                                  </tr>
+                                  <tr>
+                                    <td>12.06.2021 16:00:00</td>
+                                    <td>Счет 1123TB (основной)</td>
+                                    <td>Покупка</td>
+                                    <td>100 ₽</td>
+                                    <td>200 шт</td>
+                                    <td>20 000 ₽</td>
+                                  </tr>
+                                </tbody>
+                            </table>
+                           </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>

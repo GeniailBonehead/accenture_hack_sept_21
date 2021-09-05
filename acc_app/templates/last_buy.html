@@ -22,15 +22,28 @@
     </tr>
   {% for line in data %}
     <tr id="block" class="block">
-        <td><a href="stats{{ line.link }}">{{ line.name }}</a></td>
+        <td><a href="/accenture/stock/{{ line.data_id }}&{{ line.name }}&{{ line.short_link }}">{{ line.name }}</a></td>
         <td>{{ line.last }}</td>
         <td>{{ line.max_price }}</td>
         <td>{{ line.min_price }}</td>
         <td>{{ line.change }}</td>
-        <td>{{ line.perc_change }}</td>
+        <td>
+            {% if line.alarm == 1 %}
+            <font color="green">
+                <strong>
+            {% endif %}
+            {% if line.alarm == 2 %}
+            <font color="red">
+                <strong>
+            {% endif %}
+            {{ line.perc_change }}
+            {% if line.alarm > 0 %}
+                </font></strong>
+            {% endif %}
+        </td>
         <td>{{ line.amount }}</td>
         <td>{{ line.data_time }}</td>
-        <td><a href="charts/{{ line.data_id }}">График акций</a></td>
+        <td><a href="stats{{ line.link }}">Статистики компании</a></td>
     </tr>
   {% endfor %}
 </table>
