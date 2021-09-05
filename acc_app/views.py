@@ -58,7 +58,29 @@ def acc_stock(request, data_id='', name='', link=''):
         res = get_actions_online(site)
         return render(request, 'last_buy.html', context={'data': res})
     data = get_charts(data_id)
-    return render(request, 'stock.html', context={'data': data, 'name': name, 'link': link})
+    res = techanaliz()  # получаем результат теханализа
+    if res == 1:
+        recom = "Рост"
+    elif res == -1:
+        recom = "Падение"
+    else:
+        recom = "Нейтрально"
+    flash = ''
+    perc = float(data['changePercent'][1:].replace(',', '.'))
+    if perc > 4:
+        if data['changePercent'][0] == '+':
+            flash = 'Резкий скачок'
+            color = 'up'
+        else:
+            flash = 'Резкий спад'
+            color = 'down'
+    elif perc > 1:
+        if data['changePercent'][0] == '+':
+            flash = 'Скачок'
+        else:
+            flash = 'Спад'
+    return render(request, 'stock.html', context={'data': data, 'name': name, 'link': link,
+                                                  'recom': recom, 'flash': flash, 'color': color})
 
 
 def acc_post(request):
@@ -77,3 +99,16 @@ def portfolio(request):
 def send_mess(request):
     send_message()
     return HttpResponse('sent')
+
+
+# вывод теханализа
+def tech(request):
+    res = techanaliz() # получаем результат теханализа
+    if res == 1:
+        recom = "Покупать"
+    elif res == -1:
+        recom = "Продавать"
+    else:
+        recom = "Нейтрально"
+
+    return HttpResponse(recom)

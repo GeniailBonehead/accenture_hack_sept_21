@@ -176,3 +176,26 @@ def get_valute():
         else:
             line['up'] = 'down'
     return data['Valute']
+
+
+# Cкользящая средняя, берет 20 последних данных цен и делит на их количество
+def sma(data, n):
+    sum = 0
+    for i in range(n):
+        sum = sum + data["data"][i]["close"] # сумма цен закрытия
+    return sum / n # арифметическое среднее цен закрытия
+
+
+# Теханализ, если последняя цена больше, чем скользящая средняя, то возвращает рекомендацию на покупку (1),
+# если цена меньше, на продажу (-1), иначе нейтрально (0)
+def techanaliz():
+    data = get_charts(13683) # словарь котировок
+    last_cost = data["data"][0]["close"]  # получили последнюю цену закрытия
+    sm = sma(data, 20) # передаем котировки
+    if last_cost > sm:
+        return 1
+    elif last_cost < sm:
+        return -1
+    else:
+        return 0
+

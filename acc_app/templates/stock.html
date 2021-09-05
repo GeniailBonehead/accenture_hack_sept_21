@@ -269,7 +269,7 @@
               <div class="row">
                   <div class="col">
                       <div class="card">
-                          <h2 class="card-title-h2 mb-5">{{ name }}</h2>
+                          <h2 class="card-title-h2 mb-5"><div  id="comp_name">{{ name }}</div></h2>
                           <a href="/accenture/stats/equities/{{ link }}">Статистика о компании</a> <br>
                           <div class="statistic statistic--light mb-5 mt-1">
                             <div class="statistic-data">
@@ -283,6 +283,18 @@
                                 <p>
                                   Изменения дня:
                                   <span>{{ data.change }} ₽ | {{ data.changePercent }}</span>
+                                </p>
+                              </div>
+                              <div class="statistic-item">
+                                <p>
+                                  Вывод по скользящему окну:
+                                  <span>{{ recom }}</span>
+                                </p>
+                              </div>
+                              <div class="statistic-item">
+                                <p>
+                                  Вывод по мгновенному значению:
+                                  <span>{{ flash }}</span>
                                 </p>
                               </div>
                             </div>
@@ -352,5 +364,8 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        document.getElementById("comp_name").innerText = decodeURI(document.getElementById("comp_name").innerText);
+    </script>
 </body>
 </html>
